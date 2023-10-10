@@ -17,6 +17,12 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
+//User 클래스는 UserDetailsService로부터 핵심 유저 정보를 모델링한다.
+//User 클래스를 상속하고 부모 클래스인 User 클래스의 생성자를 호출할 수 있는 코드를 만든다.
+//부모 클래스인 User 클래스에 사용자 정의 생성자가 있으므로 반드시 호출할 필요가 있다.
+
+//ClubAuthMemberDTO는 DTO 역할을 수행하는 클래스인 동시에 스프링 시큐리티에서 인가/인증 작업에 사용할 수 있다.
+//password는 부모 클래스를 사용하므로 별도의 멤버 변수로 선언하지 않아도 된다.
 public class ClubAuthMemberDTO extends User  implements OAuth2User {
 
     private String email;
