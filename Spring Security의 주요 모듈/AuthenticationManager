@@ -1,0 +1,39 @@
+3) AuthenticationManager
+
+인증에 대한 부분은 이 클래스를 통해서 처리가 된다. 실질적으로는 AuthenticationManager에 등록된 AuthenticationProvider에 의해서 처리가 된다. 
+인증에 성공하면 두번째 생성자를 이용해 생성한 객체를 SecurityContext에 저장한다.
+
+public interface AuthenticationManager {
+	Authentication authenticate(Authentication authentication) throws AuthenticationException;
+}
+
+4) AuthenticationProvider
+
+이 클래스는 실제 인증에 대한 부분을 처리하는 작업을 치룬다. 
+인증 전에 Authentication 객체를 받아 인증이 완료된 객체를 반환하는 역할을 하고 아래와 같은 인터페이스를 구현해 Custom한 AuthenticationProvider를 작성하고 AuthenticationManger에 등록하면 된다.
+
+public interface AuthenticationProvider { 
+	Authentication authenticate(Authentication authentication) throws AuthenticationException;
+	boolean supports(Class<?> authentication); 
+}
+
+5) ProviderManager
+
+AuthenticationManager를 구현한 ProviderManager은 AuthenticationProvider를 구성하는 목록을 갖는다.
+
+public class ProviderManager implements AuthenticationManager, MessageSourceAware, InitializingBean {
+    public List<AuthenticationProvider> getProviders() {
+		return this.providers;
+	}
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		Class<? extends Authentication> toTest = authentication.getClass();
+		AuthenticationException lastException = null;
+		AuthenticationException parentException = null;
+		Authentication result = null;
+		Authentication parentResult = null;
+		int currentPosition = 0;
+		int size = this.providers.size();
+        // for문으로 모든 provider를 순회하여 처리하고 result가 나올때까지 반복한다.
+		for (AuthenticationProvider provider : getProviders()) { ... }
+	}
+}
