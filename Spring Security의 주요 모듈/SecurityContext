@@ -1,0 +1,13 @@
+8) SecurityContextHolder
+
+SecurityContextHolder는 보안 주체의 세부 정보를 포함하여 응용 프로그램의 현재 보안 컨텍스트에 대한 세부 정보가 저장됩니다.
+
+9) SecurityContext
+
+Authentication을 보관하는 역할을 하며, SecurityContext를 통해 Authentication을 저장하거나 꺼내올 수 있습니다.
+
+SecurityContextHolder.getContext().set or get Authentication(authenticationObject);
+
+10) GrantedAuthority
+
+GrantedAuthority는 현재 사용자(Pricipal)가 가지고 있는 권한을 의미하며 ROLE_ADMIN, ROLE_USER와 같이 ROLE_* 형태로 사용합니다. GrantedAuthority객체는 UserDetailsService에 의해 불러올 수 있고, 특정 자원에 대한 권한이 있는지 없는지를 검사해 접근 허용 여부를 결정합니다.
