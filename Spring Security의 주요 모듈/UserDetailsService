@@ -1,0 +1,23 @@
+6) UserDetailsService
+
+이 클래스는 UserDetails 객체를 반환하는 하나의 메서드만을 가지고 있는데, 
+일반적으로 이를 구현한 클래스에서 UserRepository를 주입받아 DB와 연결하여 처리한다.
+
+public interface UserDetailsService {
+	UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+}
+
+7) UserDetails
+
+인증에 성공하여 생성된 UserDetails클래스는 Authentication 객체를 구현한 UsernamePasswordAuthenticationToken을 생성하기 위해 사용됩니다. 
+UserDetails를 구현하여 처리할 수 있습니다.
+
+public interface UserDetails extends Serializable {
+	Collection<? extends GrantedAuthority> getAuthorities();
+	String getPassword();
+	String getUsername();
+	boolean isAccountNonExpired();
+	boolean isAccountNonLocked();
+	boolean isCredentialsNonExpired();
+	boolean isEnabled();
+}
